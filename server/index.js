@@ -7,7 +7,7 @@ const dbUrl = process.env.LOCAL_DB_CONNECT;
 const authRoute = require("./routes/auth");
 const mongoOpts = { useNewUrlParser: true , useNewUrlParser : true };
 
-app.use(cors())
+app.use(cors());
 app.use(express.json());
 
 mongoose.connect("mongodb+srv://morse_coder:morse_coder@atlascluster.28usg8c.mongodb.net/test", mongoOpts, (err) => {
