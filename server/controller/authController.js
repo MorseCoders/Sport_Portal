@@ -26,7 +26,7 @@ async function studentRegistration(req, res, next) {
     if (existingUser) return res.status(400).json("Student already exist");
 
     const savedUser = await student.save();
-    return savedUser;
+    return res.json(savedUser);
 }
 
 async function studentLogin(req, res, next) {
@@ -49,7 +49,7 @@ async function studentLogin(req, res, next) {
             expiresIn: "24h",
         }
     );
-    return accessToken;
+    return res.json(accessToken);
 }
 
 module.exports = {

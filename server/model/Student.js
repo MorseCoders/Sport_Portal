@@ -9,7 +9,6 @@ const studentSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
-        unique: true,
         min: 6,
         max: 255,
     },

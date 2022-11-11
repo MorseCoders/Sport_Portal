@@ -1,11 +1,13 @@
 const express = require("express");
 const app = express();
+const cors = require('cors')
 const mongoose = require("mongoose");
 require("dotenv").config();
 const dbUrl = process.env.LOCAL_DB_CONNECT;
 const authRoute = require("./routes/auth");
 const mongoOpts = { useNewUrlParser: true };
 
+app.use(cors());
 app.use(express.json());
 mongoose.connect(dbUrl, mongoOpts, (err) => {
     if (err) console.log(err);
