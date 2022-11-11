@@ -1,120 +1,135 @@
-import React from 'react'
+import React ,{useEffect} from 'react'
 import SportItem from './SportItem'
+import Cricket from "../../asset/cricket.jpeg";
+import Chess from "../../asset/chess.jpeg";
+import Badminton from "../../asset/badminton.jpeg";
+import Football from "../../asset/football.jpeg";
+import Carrom from "../../asset/carrom.jpeg";
+import Snooker from "../../asset/snooker.jpeg";
+import Table_tennis from  "../../asset/table_tennis.jpeg";
+import Lawn_tennis from  "../../asset/lwan_tennis.jpeg";
+import Basketball from  "../../asset/basketball.jpeg";
+import Volleyball from  "../../asset/vollyballl.jpeg";
+
+
 const DUMMY_DATA = [
   {
     id: 1,
     name: "Cricket",
-    minimun_Player: 11,
-    src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScXs2O6hJmCLB_i1B17GIoTF9KRjKLJntS3Q&usqp=CAU",
+    minimun_Player: 22,
+    src: Cricket ,
+    status : "true",
     clg: "gehu"
   },
   {
     id: 2,
-    name: "Cricket",
-    minimun_Player: 11,
-    src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScXs2O6hJmCLB_i1B17GIoTF9KRjKLJntS3Q&usqp=CAU",
-    clg: "geu"
+    name: "Chess",
+    minimun_Player: 2,
+    src: Chess,
+    status : "true",
+    clg: "gehu"
   },
   {
     id: 3,
-    name: "Cricket",
-    minimun_Player: 11,
-    clg: "geub",
-    src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScXs2O6hJmCLB_i1B17GIoTF9KRjKLJntS3Q&usqp=CAU"
+    name: "Badminton",
+    minimun_Player: 2,
+    clg: "gehu",
+    status : "false",
+    src: Badminton,
   },
+  
   {
     id: 4,
-    name: "Cricket",
-    minimun_Player: 11,
-    clg: "geub",
-    src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScXs2O6hJmCLB_i1B17GIoTF9KRjKLJntS3Q&usqp=CAU"
+    name: "Football",
+    minimun_Player: 22,
+    clg: "gehu",
+    status : "true",
+    src: Football,
   },
   {
     id: 5,
-    name: "Cricket",
-    minimun_Player: 11,
-    clg: "geuh",
-    src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScXs2O6hJmCLB_i1B17GIoTF9KRjKLJntS3Q&usqp=CAU"
-  }, {
+    name: "Vollyball",
+    minimun_Player: 14,
+    clg: "gehu",
+    status : "true",
+    src: Volleyball,
+  },
+  {
     id: 6,
-    name: "Cricket",
-    minimun_Player: 11,
-    clg: "geu",
-    src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScXs2O6hJmCLB_i1B17GIoTF9KRjKLJntS3Q&usqp=CAU"
+    name: "Carrom",
+    minimun_Player: 2,
+    clg: "gehu",
+    status : "true",
+    src: Carrom,
   },
   {
     id: 7,
-    name: "Cricket",
-    minimun_Player: 11,
-    clg: "geu",
-    src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScXs2O6hJmCLB_i1B17GIoTF9KRjKLJntS3Q&usqp=CAU"
+    name: "Lawn-Tennis",
+    minimun_Player: 2,
+    clg: "gehu",
+    status : "true",
+    src: Lawn_tennis,
   },
   {
     id: 8,
-    name: "Cricket",
-    minimun_Player: 11,
-    clg: "geu",
-    src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScXs2O6hJmCLB_i1B17GIoTF9KRjKLJntS3Q&usqp=CAU"
+    name: "Table-Tennis",
+    minimun_Player: 2,
+    clg: "gehu",
+    status : "true",
+    src: Table_tennis,
   },
   {
     id: 9,
-    name: "Cricket",
-    minimun_Player: 11,
-    clg: "geu",
-    src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScXs2O6hJmCLB_i1B17GIoTF9KRjKLJntS3Q&usqp=CAU"
+    name: "Snooker",
+    minimun_Player: 2,
+    clg: "gehu",
+    status : "true",
+    src: Snooker,
   },
   {
     id: 10,
-    name: "Cricket",
-    minimun_Player: 11,
-    clg: "geu",
-    src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScXs2O6hJmCLB_i1B17GIoTF9KRjKLJntS3Q&usqp=CAU"
+    name: "Basketball",
+    minimun_Player: 14,
+    clg: "gehu",
+    status : "true",
+    src: Basketball,
   },
+
+  
 ]
 
-const SportsList = () => {
+const SportsList = (props) => {
+
+  
+  useEffect(()=>{
+    
+  } , [])
 
   const gehu = DUMMY_DATA.filter((s) => {
     return (s.clg === "gehu");
 
   });
-  const geu = DUMMY_DATA.filter((s) => {
-    return (s.clg === "geu");
+  // const geu = DUMMY_DATA.filter((s) => {
+  //   return (s.clg === "geu");
 
-  });
-  const geub = DUMMY_DATA.filter((s) => {
-    return (s.clg === "geub");
+  // });
+  // const geub = DUMMY_DATA.filter((s) => {
+  //   return (s.clg === "geub");
 
-  });
+  // });
 
   return (
-    <section >
+    <section className='bg-gray-700 w-screen h-full pt-10' >
       <div> 
-      <div> GEHU..</div>
-      <div className='w-screen h-max grid grid-cols-1 sm:grid-cols-2  md:grid-cols-3 gap-3   place-items-center p-5  '>
+    
+      <div className='w-screen h-max grid grid-cols-1 sm:grid-cols-2  md:grid-cols-4 gap-x-3 gap-y-14   place-items-center p-5  '>
         {gehu.map((item) => {
 
-          return <SportItem key={item.id} sport={item} />
+          return <SportItem key={item.id} sport={item} onShowForm ={props.onShowForm} sports={props.sport} />
         })}
       </div></div>
-      <div>
-      <div> GEU..</div>
-      <div className='w-screen h-max grid grid-cols-1 sm:grid-cols-2  md:grid-cols-3 gap-3   place-items-center p-5  '>
-        {geu.map((item) => {
-
-          return <SportItem key={item.id} sport={item} />
-        })}
-      </div>
-      </div>
-      <div>
-      <div> GEUB..</div>
-      <div className='w-screen h-max grid grid-cols-1 sm:grid-cols-2  md:grid-cols-3 gap-3   place-items-center p-5  '>
-        {geub.map((item) => {
-
-          return <SportItem key={item.id} sport={item} />
-        })}
-      </div>
-      </div>
+    
+     
 
     </section>
   )

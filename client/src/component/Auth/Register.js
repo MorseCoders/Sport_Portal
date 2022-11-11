@@ -1,11 +1,13 @@
 import React  , {useState} from 'react'
-import io from "socket.io-client";
-const socket = io.connect("http://localhost:3001");
+import { useNavigate  } from 'react-router-dom';
+import axios from "axios";
+const URL = "http://localhost:4000";
 const Register = () => {
+  
+  const navigate = useNavigate();
+  const [user , setUser] = useState({college_name : "" , username : "" , password : "" ,password2 : "" , studentID  :"", email : "" });
 
-  const [user , setUser] = useState({college_name : "" , username : "" , password : "" ,password2 : "" , studentID  :"" });
-
-  const [error , setError] = useState(false);
+  const [error , setError] = useState({});
 
   const onChangeInput = (e)=>{
     const key = e.target.id;
@@ -24,12 +26,31 @@ const Register = () => {
     if(user.password !== user.password2  )
     {
       console.log("incorrect password");
-      setError(true);
+      setError((pre)=>{
+        return ({...pre , Status : "Password MisMatch"});
+    });
       
     }else{
       console.log(user);
-      socket.emit("new_user_detail" , {userDetail : user});
+      const USER = {
+        id: user.studentID ,
+        name: user.username,
+        email: user.email,
+        password: user.password,
+        college: user.college_name,
+      }
+      axios.post(`${URL}/api/user/register`,USER ).then(res =>{
+        console.log(res);
+        console.log(res.status);
+        console.log(res.data);
+        navigate("/");
+      } ).catch((err)=>{
+        console.log(err.response.data);
+        setError((pre)=>{
 
+          return ({...pre , Status : err.response.data});
+      });
+      })
     }
 
   
@@ -43,8 +64,8 @@ const Register = () => {
 
         <div className='bg-gray-800 h-screen w-screen flex flex-row justify-center items-center overflow-hidden  '>
      
-          <form onSubmit={onSubmitHandler} className='max-w-[400px] w-full mx-auto rounded-lg bg-gray-900 p-8 px-8  border-4 border-white shadow-lg shadow-white'>
-          {error && <div className='text-red-700 font-semibold text-center'> Password incorrect </div> }
+          <form onSubmit={onSubmitHandler} className='max-w-[400px] w-full mx-auto rounded-lg bg-gray-900 p-6 px-8  border-4 border-white shadow-lg shadow-white'>
+          {!error.length  && <div className='text-red-600 text-center'> {error.Status} </div> } 
             <h2 className='text-4xl dark:text-white font-bold text-center'>SIGN UP</h2>
             <div className='flex flex-col text-gray-300 py-2'>
               <label htmlFor='college_name' > College Name</label>
@@ -62,7 +83,7 @@ const Register = () => {
             </div>
             <div className='flex flex-col text-gray-300 py-2'>
               <label htmlFor='studentID'>Student ID </label>
-              <input required={true} id="studentID" className='rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type="text" value={user.name} onChange={onChangeInput} placeholder="Student ID"  />
+              <input required={true} id="studentID" className='rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type="Number" value={user.name} onChange={onChangeInput} placeholder="Student ID"  />
             </div>
             <div className='flex flex-col text-gray-300 py-2'>
               <label htmlFor='password'>Password</label>
@@ -71,6 +92,10 @@ const Register = () => {
             <div className='flex flex-col text-gray-300 py-2'>
               <label html="password2"> Confirm Password</label>
               <input required={true} id="password2" className='p-2 rounded-lg bg-gray-700 mt-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type="password" value={user.name} onChange={onChangeInput} placeholder="Confirm Password"  />
+            </div>
+            <div className='flex flex-col text-gray-300 py-2'>
+              <label html="email"> Email </label>
+              <input required={true} id="email" className='p-2 rounded-lg bg-gray-700 mt-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none' type="email" value={user.email} onChange={onChangeInput} placeholder="email"  />
             </div>
 
             <button  type='submit' className='w-full my-5 py-2 bg-red-500 shadow-lg shadow-red-500/50 hover:shadow-red-500/40 text-white font-semibold rounded-lg'>SIGNUP</button>
