@@ -5,12 +5,7 @@ const collegeSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    sportsAvailable: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: "Sports",
-        },
-    ],
+    sportsAvailable: [String],
     bookings: [
         {
             name: {

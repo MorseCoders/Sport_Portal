@@ -1,19 +1,29 @@
 const express = require("express");
 const app = express();
-const cors = require('cors')
+const cors = require("cors");
 const mongoose = require("mongoose");
+
 require("dotenv").config();
+
 const dbUrl = process.env.LOCAL_DB_CONNECT;
 const authRoute = require("./routes/auth");
 const bookRoute = require("./routes/booking");
-const mongoOpts = { useNewUrlParser: true };
+
+const mongoOpts = {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+};
 
 app.use(cors());
 app.use(express.json());
-mongoose.connect(dbUrl, mongoOpts, (err) => {
-    if (err) console.log(err);
-    else console.log("mongodb is connected");
-});
+mongoose.connect(
+    "mongodb+srv://morse_coder:morse_coder@atlascluster.28usg8c.mongodb.net/test",
+    mongoOpts,
+    (err) => {
+        if (err) console.log(err);
+        else console.log("mongodb is connected");
+    }
+);
 
 app.use("/api/user", authRoute);
 app.use("/api/booking", bookRoute);
