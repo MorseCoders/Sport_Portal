@@ -17,6 +17,7 @@ async function studentRegistration(req, res, next) {
         name: req.body.name,
         email: req.body.email,
         password: hashedPassword,
+        college: req.body.college,
     });
 
     let existingUser = await Student.findOne({ id: student.id });

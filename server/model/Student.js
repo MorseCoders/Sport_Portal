@@ -26,6 +26,10 @@ const studentSchema = new mongoose.Schema({
         max: 1024,
         min: 6,
     },
+    college: {
+        type: String,
+        required: true,
+    },
 });
 
 module.exports = mongoose.model("Student", studentSchema);
