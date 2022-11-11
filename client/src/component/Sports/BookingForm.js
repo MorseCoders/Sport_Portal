@@ -27,13 +27,12 @@ const BookingForm = (props) => {
         const SPORT = {
             id: props.user.id,
             name: props.user.name,
-            college: props.user.college,
-            sportsname: props.sport,
+            collegeName: props.user.college,
+            sport: props.sport,
             date : bookingDetail.date  ,
             startTime :bookingDetail.startTime   ,
             endTime : bookingDetail.endTime  , 
-           
-            miniplayer : bookingDetail.player_count,
+            player : bookingDetail.player_count,
         }
         console.log(SPORT)
         axios.post(`${URL}/api/booking/add`,SPORT).then(res => {
