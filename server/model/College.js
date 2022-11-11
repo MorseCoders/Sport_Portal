@@ -8,26 +8,19 @@ const collegeSchema = new mongoose.Schema({
     sportsAvailable: [String],
     bookings: [
         {
-            name: {
+            name: String,
+            startTime: {
                 type: String,
                 required: true,
             },
-            bookings: [
-                {
-                    startTime: {
-                        type: String,
-                        required: true,
-                    },
-                    endTime: {
-                        type: String,
-                        required: true,
-                    },
-                    date: {
-                        type: Date,
-                        required: true,
-                    },
-                },
-            ],
+            endTime: {
+                type: String,
+                required: true,
+            },
+            date: {
+                type: String,
+                required: true,
+            },
         },
     ],
 });
