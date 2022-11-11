@@ -1,11 +1,11 @@
-import React, { useState , useContext } from 'react';
+import React, { useState  } from 'react';
 import imgsrc from "../../asset/register.gif";
 
 import axios from "axios";
-import {Link ,  useNavigate } from "react-router-dom";
+import {Link  } from "react-router-dom";
 const URL = "http://localhost:4000";
 const Login = (props) => {
-  const navigate = useNavigate();
+
   const [studentID , setstudentID ] = useState ("");
   const [password  , setPassword] = useState("");
   const [ error , setError]  = useState({}) ;

@@ -15,7 +15,9 @@ const player_count = {
 
 async function addBooking(req, res, next) {
     const { sport, players, collegeName, startTime, endTime, date } = req.body;
+    console.log(req.body)
     const count = player_count[sport];
+    console.log(count,players)
     if (players != count)
         return res.status(400).json(`${count} players are required`);
     const newEntry = {

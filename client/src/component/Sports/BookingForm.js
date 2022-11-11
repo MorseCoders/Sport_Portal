@@ -8,6 +8,7 @@ const BookingForm = (props) => {
     let isBooked = false;
     const [bookingDetail, setBookingDetail] = useState({ player_count: "", date: "", startTime: "", endTime: "" });
     
+    const [ error , setError]  = useState({}) ;
     
     const onChangeHandler = (e) => {
         const key = e.target.id;
@@ -25,23 +26,28 @@ const BookingForm = (props) => {
         console.log(bookingDetail);
         console.log("prop"+ props);
         const SPORT = {
-            id: props.user.id,
-            name: props.user.name,
-            collegeName: props.user.college,
+            id: "20011073",
+            name: "Ashutosh Uniyal",
+            collegeName: "gehu",
             sport: props.sport,
             date : bookingDetail.date  ,
             startTime :bookingDetail.startTime   ,
             endTime : bookingDetail.endTime  , 
-            player : bookingDetail.player_count,
+            players : bookingDetail.player_count,
         }
-        console.log(SPORT)
+        console.log("sport " , SPORT)
         axios.post(`${URL}/api/booking/add`,SPORT).then(res => {
             console.log(res);
             console.log(res.status);
             console.log(res.data);
-            
+            setError((pre)=>{
+                return ({...pre , Status : "booking Success "});
+              })
         }).catch((err) => {
             console.log(err.response.data);
+            setError((pre)=>{
+                return ({...pre , Status : err.response.data})
+              })
         });
 
         setBookingDetail((pre) => {
@@ -59,6 +65,8 @@ return (
             </div>
             :
             <form onSubmit={onSubmitHandler} className="relative max-w-[400px] w-full mx-auto   bg-gray-900 p-6 px-8  border-4 border-white shadow-lg shadow-white ">
+               
+              {!error.length  && <div className='text-red-600 text-center'> {error.Status} </div> } 
                 <button className='absolute top-4 right-4' onClick={props.onCloseForm}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className=" bg-white bi bi-x" viewBox="0 0 16 16">
                         <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
